@@ -167,7 +167,7 @@ src/modules/editor/data/mock-template-loader.ts
 
 当前包含：
 
-- `mockGuangeCardTemplate`：冠歌卡模板，用于通用 `/editor` 的 Editor Logic 链路。
+- `guangeCardTemplate`：冠歌卡模板，用于 `/editor` 的第一套真实卡片模板链路。
 - `mockVoiceRoomTemplate`：语音厅厅头模板，用于兼容已有语音厅演示页面。
 - `loadMockTemplate(templateId)`：按模板 ID 返回 mock template。
 
@@ -278,7 +278,7 @@ EditorShell
 ```txt
 EditorShell mount
 ↓
-loadTemplate("guange-card-demo")
+loadTemplate("card-guange-001")
 ↓
 Zustand 写入 template
 ↓
@@ -301,4 +301,3 @@ QuickEditPanel 根据 editableFields 生成表单
 - AI 能力
 
 这些能力需要在 Template JSON、状态模型和 Fabric object 映射稳定后再逐步进入。
-

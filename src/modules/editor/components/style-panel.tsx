@@ -1,10 +1,14 @@
 import { textThemes } from "../data/editor-mock-data";
 
-export function StylePanel() {
+type StylePanelProps = {
+  onClose?: () => void;
+};
+
+export function StylePanel({ onClose = () => undefined }: StylePanelProps) {
   return (
     <section className="editor-panel">
       <div className="flex items-center justify-between border-b border-white/10 px-5 py-4">
-        <button className="text-3xl leading-none text-white/70" type="button">
+        <button aria-label="关闭样式面板" className="text-3xl leading-none text-white/70" onClick={onClose} type="button">
           ×
         </button>
         <h2 className="text-base font-semibold text-white">样式主题</h2>
@@ -13,7 +17,7 @@ export function StylePanel() {
         </button>
       </div>
 
-      <div className="space-y-4 overflow-y-auto px-4 pb-6 pt-5">
+      <div className="editor-panel-body space-y-4 px-4 pb-6 pt-5">
         <div className="no-scrollbar flex gap-3 overflow-x-auto text-sm font-semibold text-white/50">
           {["内容", "主题", "颜色", "字体", "样式"].map((item, index) => (
             <button

@@ -1,10 +1,14 @@
 import { ImageIcon } from "./editor-icons";
 
-export function PosterImagePanel() {
+type PosterImagePanelProps = {
+  onClose?: () => void;
+};
+
+export function PosterImagePanel({ onClose = () => undefined }: PosterImagePanelProps) {
   return (
     <section className="editor-panel">
       <div className="flex items-center justify-between border-b border-white/10 px-5 py-4">
-        <button className="text-3xl leading-none text-white/70" type="button">
+        <button aria-label="关闭图片面板" className="text-3xl leading-none text-white/70" onClick={onClose} type="button">
           ×
         </button>
         <h2 className="text-base font-semibold text-white">图片区域</h2>
@@ -13,7 +17,7 @@ export function PosterImagePanel() {
         </button>
       </div>
 
-      <div className="space-y-4 overflow-y-auto px-4 pb-6 pt-5">
+      <div className="editor-panel-body space-y-4 px-4 pb-6 pt-5">
         <div className="grid min-h-44 place-items-center rounded-[28px] border border-dashed border-sky-300/25 bg-white/[0.06] p-5">
           <button
             className="flex items-center gap-2 rounded-2xl bg-gradient-to-r from-[#1f6fff] to-[#725cff] px-7 py-4 text-base font-semibold text-white shadow-[0_0_28px_rgba(37,99,235,0.55)]"

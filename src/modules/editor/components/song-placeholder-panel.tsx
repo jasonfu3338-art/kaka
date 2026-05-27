@@ -2,13 +2,14 @@ type SongPlaceholderPanelProps = {
   title: string;
   description: string;
   actions: string[];
+  onClose?: () => void;
 };
 
-export function SongPlaceholderPanel({ title, description, actions }: SongPlaceholderPanelProps) {
+export function SongPlaceholderPanel({ actions, description, onClose = () => undefined, title }: SongPlaceholderPanelProps) {
   return (
     <section className="editor-panel">
       <div className="flex items-center justify-between border-b border-white/10 px-5 py-4">
-        <button className="text-3xl leading-none text-white/70" type="button">
+        <button aria-label={`关闭${title}面板`} className="text-3xl leading-none text-white/70" onClick={onClose} type="button">
           ×
         </button>
         <h2 className="text-base font-semibold text-white">{title}</h2>
@@ -16,7 +17,7 @@ export function SongPlaceholderPanel({ title, description, actions }: SongPlaceh
           ✓
         </button>
       </div>
-      <div className="space-y-4 px-4 pb-6 pt-5">
+      <div className="editor-panel-body space-y-4 px-4 pb-6 pt-5">
         <div className="rounded-[28px] border border-white/10 bg-white/[0.08] p-5">
           <p className="text-sm leading-6 text-white/58">{description}</p>
         </div>

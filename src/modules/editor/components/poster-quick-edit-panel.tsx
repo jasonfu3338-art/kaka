@@ -1,11 +1,15 @@
 import { posterQuickFields } from "../data/poster-editor-data";
 import { ImageIcon, TextIcon } from "./editor-icons";
 
-export function PosterQuickEditPanel() {
+type PosterQuickEditPanelProps = {
+  onClose?: () => void;
+};
+
+export function PosterQuickEditPanel({ onClose = () => undefined }: PosterQuickEditPanelProps) {
   return (
     <section className="editor-panel">
       <div className="flex items-center justify-between border-b border-white/10 px-5 py-4">
-        <button className="text-3xl leading-none text-white/70" type="button">
+        <button aria-label="关闭快捷编辑面板" className="text-3xl leading-none text-white/70" onClick={onClose} type="button">
           ×
         </button>
         <h2 className="text-base font-semibold text-white">快捷编辑</h2>
@@ -14,7 +18,7 @@ export function PosterQuickEditPanel() {
         </button>
       </div>
 
-      <div className="max-h-[calc(min(46dvh,420px)-64px)] space-y-3 overflow-y-auto px-4 pb-6 pt-4">
+      <div className="editor-panel-body space-y-3 px-4 pb-6 pt-4">
         {posterQuickFields.map((field) => (
           <div
             className="rounded-3xl border border-white/10 bg-white/[0.08] p-4 shadow-[inset_0_1px_0_rgba(255,255,255,0.08)]"

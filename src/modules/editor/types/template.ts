@@ -2,6 +2,8 @@ export type TemplateLayerType = "text" | "image" | "decoration";
 
 export type EditableFieldType = "text" | "textarea" | "image";
 
+export type EditorTemplateType = "card" | "voice-room" | "songlist" | "poster";
+
 export type TemplateCanvas = {
   width: number;
   height: number;
@@ -83,7 +85,9 @@ export type EditableField = {
 export type EditorTemplateJson = {
   id: string;
   name: string;
-  scene: "voice-room" | "card" | "songlist" | "poster";
+  type: EditorTemplateType;
+  category: string;
+  scene: EditorTemplateType;
   canvas: TemplateCanvas;
   layers: TemplateLayer[];
   editableFields: EditableField[];

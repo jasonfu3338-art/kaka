@@ -1,10 +1,14 @@
 import { posterStyleControls } from "../data/poster-editor-data";
 
-export function PosterStylePanel() {
+type PosterStylePanelProps = {
+  onClose?: () => void;
+};
+
+export function PosterStylePanel({ onClose = () => undefined }: PosterStylePanelProps) {
   return (
     <section className="editor-panel">
       <div className="flex items-center justify-between border-b border-white/10 px-5 py-4">
-        <button className="text-3xl leading-none text-white/70" type="button">
+        <button aria-label="关闭样式面板" className="text-3xl leading-none text-white/70" onClick={onClose} type="button">
           ×
         </button>
         <h2 className="text-base font-semibold text-white">样式</h2>
@@ -13,7 +17,7 @@ export function PosterStylePanel() {
         </button>
       </div>
 
-      <div className="space-y-4 overflow-y-auto px-4 pb-6 pt-4">
+      <div className="editor-panel-body space-y-4 px-4 pb-6 pt-4">
         <div className="no-scrollbar flex gap-2 overflow-x-auto">
           {posterStyleControls.map((item, index) => (
             <button

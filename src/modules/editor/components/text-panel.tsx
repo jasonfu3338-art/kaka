@@ -1,10 +1,14 @@
 import { fontGroups, textThemes, wordArtPresets } from "../data/editor-mock-data";
 
-export function TextPanel() {
+type TextPanelProps = {
+  onClose?: () => void;
+};
+
+export function TextPanel({ onClose = () => undefined }: TextPanelProps) {
   return (
     <section className="editor-panel">
       <div className="flex items-center justify-between border-b border-white/10 px-5 py-4">
-        <button className="text-3xl leading-none text-white/70" type="button">
+        <button aria-label="关闭文字面板" className="text-3xl leading-none text-white/70" onClick={onClose} type="button">
           ×
         </button>
         <h2 className="text-base font-semibold text-white">字体与样式</h2>
@@ -21,7 +25,7 @@ export function TextPanel() {
         ))}
       </div>
 
-      <div className="space-y-5 overflow-y-auto px-4 pb-6 pt-4">
+      <div className="editor-panel-body space-y-5 px-4 pb-6 pt-4">
         <div>
           <div className="no-scrollbar mb-3 flex gap-5 overflow-x-auto text-sm font-medium text-white/50">
             {fontGroups.map((item, index) => (

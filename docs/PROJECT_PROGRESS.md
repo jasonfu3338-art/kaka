@@ -20,7 +20,8 @@
 | Template JSON 类型 | 已完成 | 定义 `EditorTemplateJson`、`TemplateCanvas`、`TemplateLayer`、`EditableField` | 位于 `src/modules/editor/types/template.ts` |
 | Layer 类型 | 已完成 | 支持 `text`、`image`、`decoration`，包含位置、尺寸、旋转、透明度、锁定、显示等字段 | 后续可扩展更多 layer 类型 |
 | editableFields 类型 | 已完成 | 支持 `text`、`textarea`、`image`，用于自动驱动快捷编辑 UI | 当前已接入通用 `/editor` |
-| Mock Template Loader | 已完成 | 新增冠歌卡模板和语音厅模板 mock loader | 位于 `src/modules/editor/data/mock-template-loader.ts` |
+| Mock Template Loader | 已完成 | 新增冠歌卡模板和语音厅模板 mock loader | 冠歌卡已拆分到 `src/modules/editor/data/cardTemplate.mock.ts` |
+| 冠歌卡 Template JSON | 已完成 | 第一套真实卡片模板 JSON，包含 `type: card`、`category: 冠歌卡`、卡片专属 layers 和 editableFields | `/editor` 当前加载 `card-guange-001` |
 | 基础 Canvas 渲染 | 已完成 | Fabric.js 根据 Template JSON 渲染 text、image、decoration layer | 位于 `src/modules/editor/lib/fabric-template-renderer.ts` |
 | 快捷编辑同步 | 已完成 | 表单修改同步 `editableFields.value` 和对应 layer，再触发 Canvas 重绘 | 位于 `src/stores/editor-store.ts` 和 `quick-edit-panel.tsx` |
 | 图层列表读取 Template JSON | 已完成 | 图层面板从当前 template 读取 layers 并展示 | 当前只展示，不做拖拽和排序编辑 |
@@ -55,4 +56,3 @@
 | P1 | 导出 PNG/JPG | 基于 Fabric Canvas 输出静态图片 |
 | P1 | Template JSON 拆分 | 后续将 mock template 拆分为更小文件，避免单文件过长 |
 | P1 | 图层显示控制 | 支持 visible/locked 的基础状态切换 |
-

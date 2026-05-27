@@ -10,7 +10,7 @@ export type BottomToolbarTool<T extends string = EditorPanel> = {
 };
 
 type BottomToolbarProps<T extends string = EditorPanel> = {
-  activePanel: T;
+  activePanel: T | null;
   onChange: (panel: T) => void;
   tools?: readonly BottomToolbarTool<T>[];
 };
@@ -38,7 +38,7 @@ export function BottomToolbar<T extends string = EditorPanel>({
       style={{ bottom: "var(--editor-toolbar-bottom)", height: "var(--editor-toolbar-height)" }}
     >
       <div
-        className="pointer-events-auto grid gap-1 rounded-[28px] border-2 border-emerald-300/80 bg-black/70 p-2 shadow-[0_-18px_60px_rgba(37,99,235,0.22)] backdrop-blur-2xl"
+        className="pointer-events-auto grid gap-1 rounded-[28px] border border-white/10 bg-black/70 p-2 shadow-[0_-18px_60px_rgba(37,99,235,0.22)] backdrop-blur-2xl"
         style={{ gridTemplateColumns: `repeat(${tools.length}, minmax(0, 1fr))` }}
       >
         {tools.map((tool) => {

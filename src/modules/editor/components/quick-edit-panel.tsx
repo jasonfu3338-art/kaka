@@ -6,6 +6,11 @@ import { ImageIcon, TextIcon } from "./editor-icons";
 
 const emptyFields: EditableField[] = [];
 
+const imageOptions: Record<string, string[]> = {
+  avatar: ["/mock/templates/guanming-demo.JPG", "/mock/templates/ting-fengmian.JPG"],
+  background: ["/mock/templates/guange-demo.JPG", "/mock/templates/detail-guange.PNG", "/mock/templates/poster-demo.JPG"],
+};
+
 function getImageLabel(field: EditableField) {
   if (!field.value) {
     return field.placeholder;
@@ -16,14 +21,26 @@ function getImageLabel(field: EditableField) {
   return parts[parts.length - 1] || field.value;
 }
 
-export function QuickEditPanel() {
+function getNextImageValue(field: EditableField) {
+  const options = imageOptions[field.key] ?? [field.value];
+  const currentIndex = options.indexOf(field.value);
+  const nextIndex = currentIndex >= 0 ? (currentIndex + 1) % options.length : 0;
+
+  return options[nextIndex] ?? field.value;
+}
+
+type QuickEditPanelProps = {
+  onClose: () => void;
+};
+
+export function QuickEditPanel({ onClose }: QuickEditPanelProps) {
   const fields = useEditorStore((state) => state.template?.editableFields) ?? emptyFields;
   const updateEditableField = useEditorStore((state) => state.updateEditableField);
 
   return (
     <section className="editor-panel">
       <div className="flex items-center justify-between border-b border-white/10 px-5 py-4">
-        <button className="text-3xl leading-none text-white/70" type="button">
+        <button aria-label="关闭快捷编辑面板" className="text-3xl leading-none text-white/70" onClick={onClose} type="button">
           ×
         </button>
         <h2 className="text-base font-semibold text-white">快捷编辑</h2>
@@ -32,7 +49,7 @@ export function QuickEditPanel() {
         </button>
       </div>
 
-      <div className="space-y-3 overflow-y-auto px-4 pb-6 pt-4">
+      <div className="editor-panel-body space-y-3 px-4 pb-6 pt-4">
         {fields.map((field) => (
           <div
             className="rounded-3xl border border-white/10 bg-white/[0.08] p-4 shadow-[inset_0_1px_0_rgba(255,255,255,0.08)]"
@@ -50,6 +67,7 @@ export function QuickEditPanel() {
             {field.type === "image" ? (
               <button
                 className="flex min-h-14 w-full items-center justify-center gap-2 rounded-2xl border border-dashed border-sky-300/30 bg-sky-300/10 px-3 py-3 text-sm font-semibold text-sky-100"
+                onClick={() => updateEditableField(field.key, getNextImageValue(field))}
                 type="button"
               >
                 <ImageIcon className="size-5" />

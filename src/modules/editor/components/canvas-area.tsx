@@ -5,7 +5,11 @@ import { useEffect, useRef } from "react";
 import { useEditorStore } from "@/stores/editor-store";
 import { renderTemplateToFabric } from "../lib/fabric-template-renderer";
 
-export function CanvasArea() {
+type CanvasAreaProps = {
+  onCanvasClick?: () => void;
+};
+
+export function CanvasArea({ onCanvasClick }: CanvasAreaProps) {
   const canvasElementRef = useRef<HTMLCanvasElement>(null);
   const fabricCanvasRef = useRef<Canvas | null>(null);
   const template = useEditorStore((state) => state.template);
@@ -57,6 +61,7 @@ export function CanvasArea() {
         <div className="absolute -inset-3 rounded-[34px] bg-gradient-to-br from-sky-400/24 via-indigo-500/14 to-fuchsia-400/18 blur-xl" />
         <div
           className="relative overflow-hidden rounded-[28px] border border-white/14 bg-white/[0.04] shadow-[0_28px_90px_rgba(0,0,0,0.72),0_0_45px_rgba(58,147,255,0.28)]"
+          onPointerDown={onCanvasClick}
           style={{ aspectRatio }}
         >
           <canvas className="block h-full w-full" ref={canvasElementRef} />

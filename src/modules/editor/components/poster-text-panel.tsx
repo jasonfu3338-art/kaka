@@ -1,10 +1,14 @@
 import { posterStyleControls } from "../data/poster-editor-data";
 
-export function PosterTextPanel() {
+type PosterTextPanelProps = {
+  onClose?: () => void;
+};
+
+export function PosterTextPanel({ onClose = () => undefined }: PosterTextPanelProps) {
   return (
     <section className="editor-panel">
       <div className="flex items-center justify-between border-b border-white/10 px-5 py-4">
-        <button className="text-3xl leading-none text-white/70" type="button">
+        <button aria-label="关闭文字面板" className="text-3xl leading-none text-white/70" onClick={onClose} type="button">
           ×
         </button>
         <h2 className="text-base font-semibold text-white">文字块编辑</h2>
@@ -13,7 +17,7 @@ export function PosterTextPanel() {
         </button>
       </div>
 
-      <div className="space-y-4 overflow-y-auto px-4 pb-6 pt-4">
+      <div className="editor-panel-body space-y-4 px-4 pb-6 pt-4">
         <textarea
           className="min-h-32 w-full resize-none rounded-[24px] border border-white/10 bg-white/[0.08] p-4 text-base leading-7 text-white outline-none shadow-[inset_0_1px_0_rgba(255,255,255,0.08)]"
           defaultValue={"收光奖励\n1.0 奖励 2\n2.0 奖励 6\n每小时截图报备"}
