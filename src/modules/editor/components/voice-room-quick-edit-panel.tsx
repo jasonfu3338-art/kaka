@@ -1,25 +1,23 @@
-"use client";
-
-import { useEditorStore } from "@/stores/editor-store";
 import type { EditableField } from "../types/template";
 import { ImageIcon, TextIcon } from "./editor-icons";
 
-const emptyFields: EditableField[] = [];
+type VoiceRoomQuickEditPanelProps = {
+  fields: EditableField[];
+  values: Record<string, string>;
+  onChange: (key: string, value: string) => void;
+};
 
-function getImageLabel(field: EditableField) {
-  if (!field.value) {
-    return field.placeholder;
+function getImageLabel(value: string, placeholder: string) {
+  if (!value) {
+    return placeholder;
   }
 
-  const parts = field.value.split("/");
+  const parts = value.split("/");
 
-  return parts[parts.length - 1] || field.value;
+  return parts[parts.length - 1] || value;
 }
 
-export function QuickEditPanel() {
-  const fields = useEditorStore((state) => state.template?.editableFields) ?? emptyFields;
-  const updateEditableField = useEditorStore((state) => state.updateEditableField);
-
+export function VoiceRoomQuickEditPanel({ fields, onChange, values }: VoiceRoomQuickEditPanelProps) {
   return (
     <section className="editor-panel">
       <div className="flex items-center justify-between border-b border-white/10 px-5 py-4">
@@ -32,19 +30,15 @@ export function QuickEditPanel() {
         </button>
       </div>
 
-      <div className="space-y-3 overflow-y-auto px-4 pb-6 pt-4">
+      <div className="max-h-[calc(min(46dvh,420px)-64px)] space-y-3 overflow-y-auto px-4 pb-6 pt-4">
         {fields.map((field) => (
           <div
             className="rounded-3xl border border-white/10 bg-white/[0.08] p-4 shadow-[inset_0_1px_0_rgba(255,255,255,0.08)]"
             key={field.key}
           >
             <div className="mb-3 flex items-center justify-between gap-3">
-              <span className="text-sm font-semibold text-white/72">{field.label}</span>
-              {field.type === "image" ? (
-                <ImageIcon className="size-5 text-white/42" />
-              ) : (
-                <TextIcon className="size-5 text-white/42" />
-              )}
+              <p className="text-sm font-semibold text-white/72">{field.label}</p>
+              {field.type === "image" ? <ImageIcon className="size-5 text-white/42" /> : <TextIcon className="size-5 text-white/42" />}
             </div>
 
             {field.type === "image" ? (
@@ -53,21 +47,21 @@ export function QuickEditPanel() {
                 type="button"
               >
                 <ImageIcon className="size-5" />
-                {getImageLabel(field)}
+                {getImageLabel(values[field.key] ?? field.value, field.placeholder)}
               </button>
             ) : field.type === "textarea" ? (
               <textarea
-                className="min-h-24 w-full resize-none rounded-2xl border border-white/8 bg-black/18 p-3 text-sm leading-6 text-white outline-none placeholder:text-white/25"
-                onChange={(event) => updateEditableField(field.key, event.target.value)}
+                className="min-h-32 w-full resize-none rounded-2xl border border-white/8 bg-black/18 p-3 text-sm leading-6 text-white outline-none placeholder:text-white/25"
+                onChange={(event) => onChange(field.key, event.target.value)}
                 placeholder={field.placeholder}
-                value={field.value}
+                value={values[field.key] ?? field.value}
               />
             ) : (
               <input
                 className="h-12 w-full rounded-2xl border border-white/8 bg-black/18 px-3 text-sm font-semibold text-white outline-none placeholder:text-white/25"
-                onChange={(event) => updateEditableField(field.key, event.target.value)}
+                onChange={(event) => onChange(field.key, event.target.value)}
                 placeholder={field.placeholder}
-                value={field.value}
+                value={values[field.key] ?? field.value}
               />
             )}
           </div>

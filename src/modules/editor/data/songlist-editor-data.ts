@@ -1,5 +1,5 @@
 import type { BottomToolbarTool } from "../components/bottom-toolbar";
-import { ImageIcon, LayersIcon, SparkIcon, TextIcon } from "../components/editor-icons";
+import { LayersIcon, SparkIcon, TextIcon } from "../components/editor-icons";
 
 export type SonglistPanel = "quick" | "content" | "batch" | "style" | "multi" | "nudge" | "layers";
 

@@ -49,4 +49,8 @@ next-env.d.ts
 /songlist-editor-ui.png
 /songlist-layer-scroll-ui.png
 /songlist-quick-edit-ui.png
+/poster-editor-ui.png
 /template-detail-ui*.png
+/voice-room-editor-ui.png
+/voice-room-quick-edit-ui.png
+/voice-room-layer-ui.png

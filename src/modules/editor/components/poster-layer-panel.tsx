@@ -1,18 +1,18 @@
 "use client";
 
-import { songLayers } from "../data/songlist-editor-data";
+import { posterLayers } from "../data/poster-editor-data";
 import { EyeIcon, LayersIcon, LockIcon } from "./editor-icons";
 
-type SongLayerPanelProps = {
+type PosterLayerPanelProps = {
   open: boolean;
   onClose: () => void;
 };
 
-export function SongLayerPanel({ open, onClose }: SongLayerPanelProps) {
+export function PosterLayerPanel({ open, onClose }: PosterLayerPanelProps) {
   return (
     <>
       <button
-        aria-label="关闭歌单图层遮罩"
+        aria-label="关闭海报图层遮罩"
         className={`fixed inset-0 z-50 bg-black/45 transition ${open ? "opacity-100" : "pointer-events-none opacity-0"}`}
         onClick={onClose}
         type="button"
@@ -27,9 +27,9 @@ export function SongLayerPanel({ open, onClose }: SongLayerPanelProps) {
             <span className="grid size-8 place-items-center rounded-full bg-white/10">
               <LayersIcon className="size-4" />
             </span>
-            歌单图层
+            海报图层
           </div>
-          <p className="mb-4 text-xs text-white/38">多个文本区域 / 背景图 / 装饰图 / 标题文字 / 二维码</p>
+          <p className="mb-4 text-xs text-white/38">背景图 / 人物图 / 标题文字 / 福利文字 / 规则文字 / 二维码 / 装饰光效</p>
           <div className="mb-4 grid grid-cols-2 rounded-2xl bg-white/8 p-1 text-sm">
             <button className="rounded-xl bg-white/14 py-2 font-semibold text-white" type="button">
               单选
@@ -39,13 +39,14 @@ export function SongLayerPanel({ open, onClose }: SongLayerPanelProps) {
             </button>
           </div>
         </div>
+
         <div className="min-h-0 flex-1 space-y-3 overflow-y-auto overscroll-contain pb-4 pr-1">
-          {songLayers.map((layer, index) => (
+          {posterLayers.map((layer, index) => (
             <div className="grid grid-cols-[32px_1fr_32px] items-center gap-3" key={layer.name}>
               <EyeIcon className="size-6 text-white/80" />
               <div
                 className={`flex items-center gap-3 rounded-2xl border p-2 ${
-                  index === 0 ? "border-sky-400/70 bg-sky-400/12 shadow-[0_0_18px_rgba(56,189,248,0.25)]" : "border-white/10 bg-white/[0.08]"
+                  index === 3 ? "border-sky-400/70 bg-sky-400/12 shadow-[0_0_18px_rgba(56,189,248,0.25)]" : "border-white/10 bg-white/[0.08]"
                 }`}
               >
                 <div className="grid size-14 place-items-center rounded-xl bg-white/85 text-[10px] font-semibold text-slate-600">

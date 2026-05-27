@@ -22,14 +22,14 @@ export function SonglistEditorDemo() {
   };
 
   return (
-    <main className="relative mx-auto min-h-dvh w-full max-w-md overflow-hidden bg-[#02030a] text-white">
+    <main className="relative mx-auto min-h-dvh w-full max-w-md overflow-x-hidden bg-[#02030a] text-white">
       <div className="pointer-events-none absolute inset-0 bg-[radial-gradient(circle_at_50%_5%,rgba(148,163,184,0.26),transparent_34%),radial-gradient(circle_at_72%_48%,rgba(244,114,182,0.13),transparent_28%),linear-gradient(180deg,#02030a_0%,#060716_55%,#02030a_100%)]" />
 
       <EditorHeader onLayersClick={() => setLayerPanelOpen((open) => !open)} />
       <SongLayerPanel open={layerPanelOpen} onClose={() => setLayerPanelOpen(false)} />
       <SonglistCanvasArea />
 
-      <div className="fixed inset-x-0 bottom-[92px] z-30 mx-auto w-full max-w-md px-3">
+      <div className="editor-floating-panel">
         {activePanel === "quick" && <SongQuickEditPanel />}
         {activePanel === "content" && <SongTextBlockPanel />}
         {activePanel === "batch" && <BatchSongEditPanel />}

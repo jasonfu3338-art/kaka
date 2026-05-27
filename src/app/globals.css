@@ -3,6 +3,8 @@
 :root {
   --background: #07070b;
   --foreground: #f8fafc;
+  --editor-toolbar-bottom: calc(env(safe-area-inset-bottom) + 12px);
+  --editor-toolbar-height: 74px;
 }
 
 @theme inline {
@@ -46,7 +48,8 @@ a {
 }
 
 .editor-panel {
-  max-height: min(46dvh, 420px);
+  pointer-events: auto;
+  max-height: calc(100dvh - 220px);
   overflow: hidden;
   border: 1px solid rgb(255 255 255 / 0.1);
   border-radius: 28px;
@@ -56,6 +59,37 @@ a {
     0 0 42px rgb(37 99 235 / 0.18),
     inset 0 1px 0 rgb(255 255 255 / 0.1);
   backdrop-filter: blur(24px);
+}
+
+.editor-canvas-scroll-area {
+  position: relative;
+  z-index: 1;
+  min-height: 100dvh;
+  overflow-x: hidden;
+  overflow-y: auto;
+}
+
+.editor-floating-panel,
+.editor-floating-panel-layer {
+  pointer-events: auto;
+  position: fixed;
+  left: 0;
+  right: 0;
+  z-index: 50;
+  width: 100%;
+  max-width: 28rem;
+  margin-inline: auto;
+  padding-inline: 0.75rem;
+  bottom: calc(var(--editor-toolbar-bottom) + var(--editor-toolbar-height) + 14px);
+  max-height: calc(100dvh - 220px);
+  overflow-y: auto;
+}
+
+.editor-fixed-action-layer {
+  pointer-events: none;
+  position: fixed;
+  inset: 0;
+  z-index: 9999;
 }
 
 .editor-head-action {
